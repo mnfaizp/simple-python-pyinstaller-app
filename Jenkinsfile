@@ -17,6 +17,5 @@ node {
     } finally {
       junit 'test-reports/results.xml'
     }
-
   }
 }
