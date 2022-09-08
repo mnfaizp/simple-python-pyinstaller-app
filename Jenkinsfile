@@ -11,7 +11,7 @@ node {
         sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
       }
     } catch (e) {
-      echo 'Test is failed'
+      echo 'Test is failed because of $e'
 
       throw e
     } finally {
