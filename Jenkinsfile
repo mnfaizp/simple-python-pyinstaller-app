@@ -18,4 +18,17 @@ node {
       junit 'test-reports/results.xml'
     }
   }
+
+  docker.image('cdrx/pyinstaller-linux:python2').inside {
+    try {
+      stage('Build') {
+        sh 'pyinstaller --onefile sources/add2vals.py'
+        archiveArtifacts 'dist/add2vals'
+      }
+    } catch (e) {
+      echo 'Build failed because $e'
+
+      throw e
+    }
+  }
 }
