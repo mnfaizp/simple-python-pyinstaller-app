@@ -22,7 +22,7 @@ node {
   stage('Deliver') {
     docker.image('cdrx/pyinstaller-linux:python2').inside("--entrypoint=''") {
       try {
-        sh 'git'
+        sh 'git push https://git.heroku.com/python-app-devops.git'
       } catch (e)  {
         echo 'Build failed because ${e}'
 
