@@ -5,30 +5,28 @@ node {
     }
   }
 
-  docker.image('qnib/pytest').inside {
-    try {
-      stage('Test') {
+  stage('Test') {
+    docker.image('qnib/pytest').inside {
+      try {
         sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
-      }
-    } catch (e) {
-      echo 'Test is failed because of $e'
+      } catch (e) {
+        echo 'Test is failed because of $e'
 
-      throw e
-    } finally {
-      junit 'test-reports/results.xml'
-    }
+        throw e
+      } finally {
+        junit 'test-reports/results.xml'
+      }
   }
 
-  docker.image('cdrx/pyinstaller-linux:python2').inside {
-    try {
-      stage('Deploy') {
+  stage('Deploy') {
+    docker.image('cdrx/pyinstaller-linux:python2').inside {
+      try {
         sh 'pyinstaller --onefile sources/add2vals.py'
         archiveArtifacts 'dist/add2vals'
-      }
-    } catch (e) {
-      echo 'Build failed because $e'
+      } catch (e)  {
+        echo 'Build failed because $e'
 
-      throw e
+      }
     }
   }
 }
