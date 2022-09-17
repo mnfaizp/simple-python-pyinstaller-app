@@ -24,7 +24,7 @@ node {
       try {
         sh 'heroku'
       } catch (e)  {
-        echo 'Build failed because ' + e
+        echo 'Build failed because ${e}'
 
         throw e
       }
