@@ -20,6 +20,10 @@ node {
     }
   }
 
+  stage('Manual Approval') {
+    input('Approve to Deploy?')
+  }
+
   withEnv([
     'VOLUME=$(pwd)/sources:/src',
     'IMAGE=cdrx/pyinstaller-linux:python2'
