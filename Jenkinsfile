@@ -20,10 +20,9 @@ node {
   }
 
   stage('Deliver') {
-    docker.image('cdrx/pyinstaller-linux:python2').inside("--entrypoint=/bin/bash") {
+    docker.image('cdrx/pyinstaller-linux:python2').inside("--entrypoint=''") {
       try {
-        sh 'pyinstaller --onefile sources/add2vals.py'
-        archiveArtifacts 'dist/add2vals'
+        sh 'heroku'
       } catch (e)  {
         echo 'Build failed because e'
 
