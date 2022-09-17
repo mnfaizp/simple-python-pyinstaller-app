@@ -19,7 +19,7 @@ node {
     }
   }
 
-  stage('Deploy') {
+  stage('Deliver') {
     docker.image('cdrx/pyinstaller-linux:python2').inside {
       try {
         sh 'pyinstaller --onefile sources/add2vals.py'
@@ -27,6 +27,7 @@ node {
       } catch (e)  {
         echo 'Build failed because $e'
 
+        throw e
       }
     }
   }
